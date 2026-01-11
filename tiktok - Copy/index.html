@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Orbi Shopping — แพลตฟอร์มคัดของตรงใจ</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+   <link rel="icon" href="asset/icon/ggg-fotor-20251206112417.png" sizes="48x48" type="image/png">
+  <link rel="icon" href="asset/icon/ggg-fotor-20251206112417.png" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="asset/icon/ggg-fotor-20251206112417.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Inter", "ui-sans-serif", "system-ui"] },
+          boxShadow: {
+            soft: "0 10px 30px rgba(0,0,0,0.06)",
+            card: "0 16px 50px rgba(0,0,0,0.10)"
+          },
+          borderRadius: {
+            app: "28px"
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    img { -webkit-user-drag: none; user-select: none; }
+    /* กันพื้นที่ iPhone notch / bottom safe-area */
+    :root { --safe-bottom: env(safe-area-inset-bottom, 0px); }
+  </style>
+</head>
+
+<body class="bg-white text-slate-900 font-sans">
+  <!-- Background / Glow -->
+  <div class="pointer-events-none fixed inset-0 -z-10">
+    <div class="absolute -top-40 left-1/2 h-[560px] w-[920px] -translate-x-1/2 rounded-full blur-3xl opacity-35"
+         style="background: radial-gradient(circle at 50% 40%, rgba(20,184,166,.42), rgba(59,130,246,.22), rgba(255,255,255,0));">
+    </div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(15,23,42,0.06)_1px,transparent_0)] [background-size:22px_22px]"></div>
+  </div>
+
+  <!-- App Shell -->
+  <div class="min-h-screen pb-[92px] sm:pb-[96px]">
+    <!-- Top App Bar -->
+    <header class="sticky top-0 z-50 backdrop-blur bg-white/70 border-b border-slate-200/70">
+      <div class="mx-auto max-w-7xl px-4 py-3 flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-2xl bg-[linear-gradient(30deg,_#ffffff_0%,_#fd58c1_33%,_#f5474d_67%,_#56bcfb_100%)] from-teal-500 to-blue-500 shadow-soft grid place-items-center text-white font-extrabold">
+            Orbi
+          </div>
+          <div class="leading-tight">
+            <div class="font-extrabold tracking-tight">Orbi Shopping</div>
+            <div class="text-xs text-slate-500 -mt-0.5">คัดของตรงปก • ตรงใจ</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="btnOpenHowTop"
+            class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition">
+            <span class="text-sm font-semibold">เรา “คัด” ยังไง</span>
+          </button>
+
+          <!-- ปุ่มค้นหาแบบไอคอน -->
+          <button id="btnFocusSearch"
+            class="h-10 w-10 rounded-2xl border border-slate-200 hover:bg-slate-50 transition grid place-items-center"
+            title="ค้นหา (Ctrl/Cmd+K)">
+            <!-- search icon -->
+            <svg class="h-5 w-5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 21l-4.3-4.3" />
+              <circle cx="11" cy="11" r="7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Views -->
+    <main class="mx-auto max-w-7xl px-4">
+      <!-- HOME VIEW -->
+      <section id="view-home" class="view pt-5 pb-10">
+        <!-- Header Card -->
+        <div class="rounded-app border border-slate-200 bg-white/80 backdrop-blur shadow-soft overflow-hidden">
+          <div class="p-5 sm:p-6">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+              <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 bg-white shadow-soft">
+                  <span class="h-2 w-2 rounded-full bg-teal-500"></span>
+                  <span class="text-xs font-semibold text-slate-700">แพลตฟอร์มคัดของที่ “ตรงปก” จากสัญญาณคุณภาพ</span>
+                </div>
+
+                <h1 class="mt-3 text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight leading-[1.08]">
+                  เลือกของไวแบบไม่ต้องเสี่ยง
+                  <span class="bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">
+                    ลองผิดลองถูก
+                  </span>
+                </h1>
+                <p class="mt-2 text-slate-600 text-sm sm:text-base max-w-2xl leading-relaxed">
+                  เราไม่ได้ขายของเอง — เรา “คัดเลือก” ของที่น่าเชื่อถือจากรีวิว ความสม่ำเสมอ และสัญญาณคุณภาพอื่น ๆ
+                </p>
+
+                <div class="mt-4 flex flex-wrap items-center gap-2">
+                  <div class="px-4 py-2 rounded-2xl border border-slate-200 bg-white shadow-soft">
+                    <div class="text-xs text-slate-500">โหมด</div>
+                    <div class="text-sm font-extrabold">Curated Picks</div>
+                  </div>
+                  <div class="px-4 py-2 rounded-2xl border border-slate-200 bg-white shadow-soft">
+                    <div class="text-xs text-slate-500">อัปเดต</div>
+                    <div class="text-sm font-extrabold">ทันที</div>
+                  </div>
+                  <button id="btnOpenHow"
+                    class="px-4 py-2 rounded-2xl bg-green-600 text-white font-extrabold shadow-soft hover:bg-slate-800 transition">
+                    ทำไมถึงน่าเชื่อถือ
+                  </button>
+                </div>
+              </div>
+
+              <!-- Search / Sort panel (เหมือนหน้าแอป) -->
+              <div class="w-full lg:w-[420px]">
+                <div class="rounded-3xl border border-slate-200 bg-white shadow-soft p-4 sm:p-5">
+                  <div class="flex items-center justify-between">
+                    <div class="font-extrabold">ค้นหา & จัดเรียง</div>
+                    <div class="text-xs text-slate-500">⌘K / Ctrl+K</div>
+                  </div>
+
+                  <div class="mt-3 grid gap-3">
+                    <div class="relative">
+                      <input id="searchInput" type="text" placeholder="ค้นหาสินค้า..."
+                        class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white shadow-soft focus:outline-none focus:ring-4 focus:ring-teal-100 focus:border-teal-300">
+                      <div class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"><span class="material-symbols-outlined">search</span></div>
+                    </div>
+
+                    <select id="sortSelect"
+                      class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white shadow-soft focus:outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-300">
+                      <option value="featured">เรียง: แนะนำ</option>
+                      <option value="score_desc">เรียง: คะแนนคัดเลือกสูงสุด</option>
+                      <option value="price_asc">เรียง: ราคาต่ำ → สูง</option>
+                      <option value="price_desc">เรียง: ราคาสูง → ต่ำ</option>
+                    </select>
+
+                    <div class="flex gap-2">
+                      <button id="btnGoCategories"
+                        class="flex-1 px-4 py-3 rounded-2xl border border-slate-200 hover:bg-slate-50 transition font-semibold">
+                        ไปที่ “หมวดหมู่”
+                      </button>
+                      <a href="#products"
+                        class="flex-1 text-center px-4 py-3 rounded-2xl bg-gradient-to-r from-teal-600 to-blue-600 text-white font-extrabold hover:opacity-95 transition shadow-card">
+                        ดูสินค้า
+                      </a>
+                    </div>
+
+                    <p class="text-xs text-slate-500">
+                      *กดแล้วไปยัง TikTok Shop/ผู้ขายโดยตรง เว็บไซต์นี้เป็นตัวกลางในการคัดเลือกและแนะนำสินค้า
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chips -->
+          <div id="products" class="px-5 sm:px-6 pb-5">
+            <div class="mt-2 flex items-end justify-between gap-3">
+              <div>
+                <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight">สินค้าที่คัดแล้ว</h2>
+                <p class="text-slate-600 text-sm mt-1">เลือกหมวดหมู่ แล้วกดสั่งซื้อได้ทันที</p>
+              </div>
+
+              <div class="hidden sm:flex items-center gap-2 text-xs text-slate-500">
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-slate-200 bg-white">
+                  <span class="h-2 w-2 rounded-full bg-teal-500"></span> Curated
+                </span>
+              </div>
+            </div>
+
+            <div id="chipRow" class="mt-4 flex flex-wrap gap-2"></div>
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="mt-5">
+          <div id="grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+
+          <!-- Footer Note -->
+          <div class="mt-10 p-5 rounded-app border border-slate-200 bg-white shadow-soft">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+              <div>
+                <div class="font-extrabold">โปร่งใสก่อนซื้อ</div>
+                <div class="text-sm text-slate-600 mt-1">
+                  เมื่อกด “สั่งซื้อผ่าน TikTok” คุณจะถูกพาไปยังหน้าร้าน/แพลตฟอร์มของผู้ขายโดยตรง
+                </div>
+              </div>
+              <div class="text-xs text-slate-500">
+                 <a href="https://www.tiktok.com/@orbistudio6699"><img
+            src="asset/icon/ggg-fotor-20251206112417.png"
+            alt="Google"
+            class="h-10 md:h-12 object-contain"
+          /></a>
+                © <span id="year"></span> สร้างโดย Orbicompany • ไม่ได้เป็นส่วนหนึ่งของ TikTok หรือผู้ขายใด ๆ
+              </div>
+            </div>
+          </div>
+        </div>
+  
+      </section>
+
+      <!-- CATEGORIES VIEW -->
+      <section id="view-categories" class="view hidden pt-5 pb-10">
+        <div class="rounded-app border border-slate-200 bg-white shadow-soft p-5 sm:p-6">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <div class="text-sm text-slate-500">ค้นหาตาม</div>
+              <h2 class="text-2xl font-extrabold tracking-tight">หมวดหมู่</h2>
+              <p class="text-slate-600 text-sm mt-1">แตะหมวดเพื่อกรองสินค้าแบบเร็ว ๆ</p>
+            </div>
+            <button id="btnBackToHome1"
+              class="px-4 py-2 rounded-2xl border border-slate-200 hover:bg-slate-50 transition font-semibold">
+              ← กลับหน้า Home
+            </button>
+          </div>
+
+          <div id="catCards" class="mt-5 grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+      </section>
+
+      <!-- FAVORITES VIEW -->
+      <section id="view-favs" class="view hidden pt-5 pb-10">
+        <div class="rounded-app border border-slate-200 bg-white shadow-soft p-5 sm:p-6">
+          <div class="flex items-center justify-between gap-3">
+            <div>
+              <div class="text-sm text-slate-500">ของที่บันทึกไว้</div>
+              <h2 class="text-2xl font-extrabold tracking-tight">ถูกใจ</h2>
+              <p class="text-slate-600 text-sm mt-1">กดรูปหัวใจบนการ์ดสินค้าเพื่อเก็บไว้</p>
+            </div>
+            <button id="btnClearFavs"
+              class="px-4 py-2 rounded-2xl border border-slate-200 hover:bg-slate-50 transition font-semibold">
+              ล้างทั้งหมด
+            </button>
+          </div>
+
+          <div class="mt-5">
+            <div id="favEmpty" class="hidden rounded-3xl border border-slate-200 bg-slate-50 p-6 text-center">
+              <div class="text-4xl">💙</div>
+              <div class="font-extrabold mt-2">ยังไม่มีรายการถูกใจ</div>
+              <div class="text-sm text-slate-600 mt-1">ลองไปหน้า Home แล้วกดหัวใจบนสินค้าที่ชอบ</div>
+              <button id="btnGoHomeFromFavEmpty"
+                class="mt-4 px-5 py-3 rounded-2xl bg-slate-900 text-white font-extrabold hover:bg-slate-800 transition">
+                ไปเลือกสินค้า
+              </button>
+            </div>
+
+            <div id="favGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROFILE VIEW -->
+      <section id="view-profile" class="view hidden pt-5 pb-10">
+        <div class="lg:pl-10">
+        <div class="rounded-3xl border border-slate-200 bg-white shadow-card overflow-hidden">
+          <div class="p-5 sm:p-6 border-b border-slate-200">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <div class="text-sm font-extrabold">วันนี้แนะนำ</div>
+                <div class="text-xs text-slate-500">Top picks ที่กดซื้อได้ทันที</div>
+              </div>
+              <div class="flex items-center gap-2">
+                <button id="btnOpenHowProfile"
+                  class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-2xl border border-slate-200 hover:bg-slate-50 transition font-semibold">
+                  วิธีคัดเลือก
+                </button>
+                <span class="inline-flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full bg-teal-50 text-teal-700 border border-teal-100">
+                  ✅ ผ่านการคัดเลือก
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-5 sm:p-6">
+            <div class="grid gap-3">
+              <div class="flex items-center gap-4 p-4 rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition">
+                <div class="h-12 w-12 rounded-2xl bg-emerald-500 from-teal-500 to-blue-500 opacity-90"></div>
+                <div class="flex-1">
+                  <div class="font-bold text-sm">ดีมาก / ไวรัล / แนะนำสุด</div>
+                  <div class="text-xs text-slate-500 mt-0.5">คัดจากสัญญาณคุณภาพ + ความนิยม</div>
+                </div>
+                <span class="text-xs font-bold text-slate-700">A+</span>
+              </div>
+
+              <div class="flex items-center gap-4 p-4 rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition">
+                <div class="h-12 w-12 rounded-2xl bg-teal-500 from-blue-500 to-teal-500 opacity-90"></div>
+                <div class="flex-1">
+                  <div class="font-bold text-sm">ดีมาก น่าซื้อ</div>
+                  <div class="text-xs text-slate-500 mt-0.5">เหมาะกับซื้อแล้วไม่เสียดาย</div>
+                </div>
+                <span class="text-xs font-bold text-slate-700">A</span>
+              </div>
+
+              <div class="flex items-center gap-4 p-4 rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition">
+                <div class="h-12 w-12 rounded-2xl bg-sky-500 from-teal-500 to-emerald-500 opacity-90"></div>
+                <div class="flex-1">
+                  <div class="font-bold text-sm">ดี คุ้ม</div>
+                  <div class="text-xs text-slate-500 mt-0.5">(ตามเกณฑ์คัดเลือก)</div>
+                </div>
+                <span class="text-xs font-bold text-slate-700">B+</span>
+              </div>
+
+              <div class="flex items-center gap-4 p-4 rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition">
+                <div class="h-12 w-12 rounded-2xl bg-indigo-500 from-teal-500 to-emerald-500 opacity-90"></div>
+                <div class="flex-1">
+                  <div class="font-bold text-sm">ใช้ได้</div>
+                  <div class="text-xs text-slate-500 mt-0.5">(ตามเกณฑ์คัดเลือก)</div>
+                </div>
+                <span class="text-xs font-bold text-slate-700">B</span>
+              </div>
+
+              <div class="flex items-center gap-4 p-4 rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition">
+                <div class="h-12 w-12 rounded-2xl bg-yellow-500 from-teal-500 to-emerald-500 opacity-90"></div>
+                <div class="flex-1">
+                  <div class="font-bold text-sm">พอใช้</div>
+                  <div class="text-xs text-slate-500 mt-0.5">(ตามเกณฑ์คัดเลือก)</div>
+                </div>
+                <span class="text-xs font-bold text-slate-700">C+</span>
+              </div>
+
+              <div class="flex items-center gap-4 p-4 rounded-2xl border border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition">
+                <div class="h-12 w-12 rounded-2xl bg-slate-500 from-teal-500 to-emerald-500 opacity-90"></div>
+                <div class="flex-1">
+                  <div class="font-bold text-sm">เสี่ยง / ไม่แนะนำ</div>
+                  <div class="text-xs text-slate-500 mt-0.5">(ตามเกณฑ์คัดเลือก)</div>
+                </div>
+                <span class="text-xs font-bold text-slate-700">C</span>
+              </div>
+            </div>
+
+            <div class="mt-5 flex items-center justify-between text-xs text-slate-500">
+              <span>อัปเดตลิสต์ได้ตลอด</span>
+              <span class="font-semibold text-slate-700">Best Picks Index</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Bottom Tab Bar (เหมือนแอปสั่งของ) -->
+  <nav class="fixed bottom-0 left-0 right-0 z-[80]">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="mb-3 sm:mb-4 rounded-[26px] border border-slate-200 bg-white/85 backdrop-blur shadow-card"
+           style="padding-bottom: var(--safe-bottom);">
+        <div class="grid grid-cols-4 gap-1 p-2">
+          <button class="tabBtn" data-view="home">
+            <div class="tabInner">
+              <svg class="tabIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>
+              </svg>
+              <div class="tabLabel">Home</div>
+            </div>
+          </button>
+
+          <button class="tabBtn" data-view="categories">
+            <div class="tabInner relative">
+              <svg class="tabIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/>
+              </svg>
+              <!-- badge จำนวนหมวด -->
+              <span id="catCount"
+                class="absolute -top-1 right-5 min-w-[18px] h-[18px] px-1 rounded-full bg-slate-900 text-white text-[11px] font-extrabold grid place-items-center">
+                0
+              </span>
+              <div class="tabLabel">หมวด</div>
+            </div>
+          </button>
+
+          <button class="tabBtn" data-view="favs">
+            <div class="tabInner relative">
+              <svg class="tabIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.8 8.6c0 6.2-8.8 11.4-8.8 11.4S3.2 14.8 3.2 8.6A4.7 4.7 0 0 1 12 6.2a4.7 4.7 0 0 1 8.8 2.4z"/>
+              </svg>
+              <!-- badge จำนวนถูกใจ -->
+              <span id="favCount"
+                class="absolute -top-1 right-5 min-w-[18px] h-[18px] px-1 rounded-full bg-rose-500 text-white text-[11px] font-extrabold grid place-items-center">
+                0
+              </span>
+              <div class="tabLabel">ถูกใจ</div>
+            </div>
+          </button>
+
+          <button class="tabBtn" data-view="profile">
+            <div class="tabInner">
+              <span class="material-symbols-outlined">equalizer</span>
+              <div class="tabLabel">การจัดเกรด</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Tab Styles (ใช้ Tailwind + utility) -->
+  <style>
+    html { scroll-behavior: smooth; 
+    }
+    .tabBtn { width:100%; }
+    .tabInner{
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:.25rem;
+      padding:.65rem .25rem;
+      border-radius:18px;
+      color: rgb(100 116 139); /* slate-500 */
+      transition: .18s ease;
+    }
+    .tabIcon{ width:22px; height:22px; }
+    .tabLabel{ font-size:12px; font-weight:800; letter-spacing:-.01em; }
+    .tabInner:hover{ background: rgb(248 250 252); color: rgb(15 23 42); }
+    .tabActive .tabInner{
+      background: linear-gradient(90deg, rgba(20,184,166,.16), rgba(59,130,246,.14));
+      color: rgb(15 23 42);
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+    }
+  </style>
+
+  <!-- Info Modal -->
+  <div id="modal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-slate-900/55"></div>
+
+    <div class="relative mx-auto max-w-lg px-4 h-full grid place-items-center">
+      <div class="w-full rounded-app bg-white border border-slate-200 shadow-card overflow-hidden">
+        <div class="p-5 border-b border-slate-200 flex items-start justify-between gap-3">
+          <div>
+            <div id="modalTitle" class="font-extrabold text-lg">ทำไมถึงน่าเชื่อถือ</div>
+            <div class="text-sm text-slate-600 mt-1">แนวทางคัดเลือกเพื่อช่วยลดความเสี่ยง</div>
+          </div>
+          <button id="btnCloseModal" class="h-10 w-10 rounded-2xl border border-slate-200 hover:bg-slate-50 transition">
+            ✕
+          </button>
+        </div>
+
+        <div class="p-5">
+          <div class="grid gap-3 text-sm text-slate-700">
+            <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50">
+              <div class="font-bold">1) สัญญาณรีวิว & ความนิยม</div>
+              <div class="text-slate-600 mt-1">พิจารณาจำนวนรีวิว ความสม่ำเสมอ และความนิยมโดยรวม</div>
+            </div>
+            <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50">
+              <div class="font-bold">2) ความตรงปก</div>
+              <div class="text-slate-600 mt-1">พิจารณาความสอดคล้องของรูป/ข้อมูลสินค้าและประสบการณ์ผู้ซื้อ</div>
+            </div>
+            <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50">
+              <div class="font-bold">3) คัดเพื่อ “ลดความเสี่ยง”</div>
+              <div class="text-slate-600 mt-1">เราไม่ได้บอกว่าดีที่สุดสำหรับทุกคน แต่ช่วยคัดตัวที่เสี่ยงต่ำ</div>
+            </div>
+          </div>
+
+          <div class="mt-4 text-xs text-slate-500">
+            *นี่เป็นแนวคิดของแพลตฟอร์มเพื่อสร้างความโปร่งใส ไม่ใช่การรับประกันโดยผู้ขาย
+          </div>
+
+          <div class="mt-5 flex gap-3">
+            <button id="btnCloseModal2"
+              class="flex-1 px-4 py-3 rounded-2xl border border-slate-200 hover:bg-slate-50 transition font-semibold">
+              ปิด
+            </button>
+            <button id="btnGoHomeFromModal"
+              class="flex-1 px-4 py-3 rounded-2xl bg-gradient-to-r from-teal-600 to-blue-600 text-white font-extrabold hover:opacity-95 transition">
+              ไปหน้า Home
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Detail Modal -->
+  <div id="productModal" class="fixed inset-0 z-[100] hidden">
+    <div class="absolute inset-0 bg-slate-900/55"></div>
+    <div class="relative mx-auto max-w-lg px-4 h-full grid place-items-center">
+      <div class="w-full rounded-app bg-white border border-slate-200 shadow-card overflow-hidden">
+        <div class="p-5 border-b border-slate-200 flex items-start justify-between gap-3">
+          <div>
+            <div id="detailTitle" class="font-extrabold text-lg"></div>
+            <div id="detailCategory" class="text-sm text-slate-500 mt-1"></div>
+          </div>
+          <button id="btnCloseProductModal" class="h-10 w-10 rounded-2xl border border-slate-200 hover:bg-slate-50 transition">
+            ✕
+          </button>
+        </div>
+        <div class="p-5 space-y-4">
+          <img id="detailImage" src="" alt="" class="w-full h-56 object-cover rounded-2xl">
+          <div id="detailBadges" class="flex flex-wrap gap-2"></div>
+          <div id="detailHighlights" class="space-y-2"></div>
+          <div id="detailPrice" class="font-extrabold text-2xl"></div>
+          <div id="detailStatus" class="text-sm font-bold"></div>
+          <div class="flex gap-3 mt-4">
+            <a id="detailBuyLink" href="#" target="_blank" rel="noopener"
+               class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-gradient-to-r from-teal-600 to-blue-600 text-white font-extrabold shadow-card hover:opacity-95 transition">
+              ซื้อสินค้า
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App script -->
+  <script src="app.js"></script>
+</body>
+</html>
